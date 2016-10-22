@@ -1,13 +1,13 @@
 # FancyFilter.js
 
-A simple to use javascript library that allows you to filter elements on a web page.
+A simple to use JavaScript library that allows you to filter elements on a web page.
 
 ## Instantiation Arguments
 `FancyFilter(selector, done)`
 
 | Name | Type | Description |
 | :-- | :-: | :-- |   
-| selector | string | This is used in the `querySelectorAll()` method to get the elemnts to filter.  |
+| selector | string | This is used in the `querySelectorAll()` method to get the elements to filter.  |
 | done | callback | This gets called every time the `filter()` method is done running. |
 
 ## Methods
