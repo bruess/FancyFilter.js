@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <title>FancyFilter.js Example</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <style>
+            .ffNotMatched {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <br>
+                    <div class="form-group">
+                        <input id="ffInput" class="form-control">
+                    </div>
+                    <span id="peopleCount" class="label label-default">0</span>
+                    <table id="people" class="table col-xs-6">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Daenerys Targaryen</td>
+                                <td>Female</td>
+                            </tr>
+                            <tr>
+                                <td>Joffrey Baratheon</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Tyrion Lannister</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Sansa Stark</td>
+                                <td>Female</td>
+                            </tr>
+                            <tr>
+                                <td>Eddard Stark</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Cersei Lannister</td>
+                                <td>Female</td>
+                            </tr>
+                            <tr>
+                                <td>Arya Stark</td>
+                                <td>Female</td>
+                            </tr>
+                            <tr>
+                                <td>Tywin Lannister</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Brienne of Tarth</td>
+                                <td>Female</td>
+                            </tr>
+                            <tr>
+                                <td>Robert Baratheon</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Jaime Lannister</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Margaery Tyrell</td>
+                                <td>Female</td>
+                            </tr>
+                            <tr>
+                                <td>Khal Drogo</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Jon Snow</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Viserys Targaryen</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Jorah Mormont</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Davos Seaworth</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Petyr Baelish</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Renly Baratheon</td>
+                                <td>Male</td>
+                            </tr>
+                            <tr>
+                                <td>Olenna Tyrell</td>
+                                <td>Female</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <br>
+                    <span id="housesCount" class="label label-default">0</span>
+                    <ul id="houses">
+                        <li>House Baratheon</li>
+                        <li>House Bolton</li>
+                        <li>House Florent</li>
+                        <li>House Lannister</li>
+                        <li>House Martell</li>
+                        <li>House Redwyne</li>
+                        <li class='ffIgnore'>House Stark</li>
+                        <li>House Umber</li>
+                        <li>House Targaryen</li>
+                        <li>House Tully</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="FancyFilter.js"></script>
+        <script>
+            var ffPeople = new FancyFilter('#people tbody tr', function() {
+                document.querySelector('#peopleCount').innerHTML = this.matched.length;
+            });
+            ffPeople.addInputListener('#ffInput');
+
+            var ffHouses = new FancyFilter('#houses li', function() {
+                document.querySelector('#housesCount').innerHTML = this.matched.length;
+            });
+            ffHouses.addInputListener('#ffInput');
+        </script>
+    </body>
+</html>
