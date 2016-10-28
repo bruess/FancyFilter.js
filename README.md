@@ -20,6 +20,7 @@ A simple to use JavaScript library that allows you to filter elements on a web p
 | Name | Type | Default | Description |
 | :-- | :-: | :-: | :-- |  
 | `delimiter` | string | `','` | This is the delimiter used to break the query into an array. |
+| `columnDelimiter` | string | `':'` | This is the delimiter used to break each item in the query array to match to a column in a table. |
 | `ignoredClass` | string | `'ffIgnore'` | Any elements with this class will not be filtered. |
 | `matchedClass` | string | `'ffMatched'` | The class that gets applied to any elements that match the query. |
 | `notMatchedClass` | string | `'ffNotMatched'` | The class that gets applied to any elements that do not match the query. |

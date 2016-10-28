@@ -113,15 +113,15 @@
                     <br>
                     <span id="housesCount" class="label label-default">0</span>
                     <ul id="houses">
+                        <li>House Targaryen</li>
+                        <li>House Stark</li>
+                        <li>House Lannister</li>
                         <li>House Baratheon</li>
                         <li>House Bolton</li>
                         <li>House Florent</li>
-                        <li>House Lannister</li>
                         <li>House Martell</li>
                         <li>House Redwyne</li>
-                        <li class='ffIgnore'>House Stark</li>
                         <li>House Umber</li>
-                        <li>House Targaryen</li>
                         <li>House Tully</li>
                     </ul>
                 </div>
@@ -133,11 +133,13 @@
                 document.querySelector('#peopleCount').innerHTML = this.matched.length;
             });
             ffPeople.addInputListener('#ffInput');
+            ffPeople.filter('');
 
             var ffHouses = new FancyFilter('#houses li', function() {
                 document.querySelector('#housesCount').innerHTML = this.matched.length;
             });
             ffHouses.addInputListener('#ffInput');
+            ffHouses.filter('');
         </script>
     </body>
 </html>

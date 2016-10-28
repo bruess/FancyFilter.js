@@ -5,6 +5,7 @@ var FancyFilter = function(selector, done) {
     var inputElement;
 
     self.delimiter = ',';
+    self.columnDelimiter = ':';
     self.ignoredClass = 'ffIgnore';
     self.matchedClass = 'ffMatched';
     self.notMatchedClass = 'ffNotMatched';
@@ -37,30 +38,33 @@ var FancyFilter = function(selector, done) {
     }
 
     var testMatch = function(element, query) {
-        var result = false;
         if (element.classList.contains(self.ignoredClass)) { return true; }
 
         var headers = getTableHeaders(element);
 
         var queryParts = query.split(self.delimiter);
-        queryParts.forEach(function(queryPart) {
-            queryPart = normalize(queryPart);
+        var result = queryParts.every(function(queryPart) {
+            var queryPart = normalize(queryPart);
+            var targetText = normalize(element.innerHTML);
 
             // Check to see if column search is being attempted
             if (queryPart.indexOf(':') !== -1) {
-                var queryPartParts = queryPart.split(':');
+                var queryPartParts = queryPart.split(self.columnDelimiter);
                 var columnIndex = headers.indexOf(queryPartParts[0]);
+
+                // Override the queryPart and targetText for this iteration if found matching column
                 if (columnIndex !== -1) {
                     queryPart = queryPartParts[1];
-                    element = element.querySelectorAll('td')[columnIndex];
+                    targetText = normalize(element.querySelectorAll('td')[columnIndex].innerHTML);
                 }
             }
 
-            var targetText = normalize(element.innerHTML);
-
-            if (targetText.indexOf(queryPart) !== -1) {
-                result = true;
+            if (queryPart === '') {
+                return true;
             }
+
+            return (targetText.search(queryPart) !== -1);
+
         });
 
         return result;
