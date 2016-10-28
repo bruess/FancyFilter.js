@@ -40,18 +40,42 @@ var FancyFilter = function(selector, done) {
         var result = false;
         if (element.classList.contains(self.ignoredClass)) { return true; }
 
+        var headers = getTableHeaders(element);
+
         var queryParts = query.split(self.delimiter);
         queryParts.forEach(function(queryPart) {
             queryPart = normalize(queryPart);
-            targetText = normalize(element.innerHTML);
+
+            // Check to see if column search is being attempted
+            if (queryPart.indexOf(':') !== -1) {
+                var queryPartParts = queryPart.split(':');
+                var columnIndex = headers.indexOf(queryPartParts[0]);
+                if (columnIndex !== -1) {
+                    queryPart = queryPartParts[1];
+                    element = element.querySelectorAll('td')[columnIndex];
+                }
+            }
+
+            var targetText = normalize(element.innerHTML);
 
             if (targetText.indexOf(queryPart) !== -1) {
                 result = true;
             }
-
         });
 
         return result;
+    }
+
+    var getTableHeaders = function(element) {
+        var headerElement = element.parentElement.parentElement.querySelectorAll('thead th');
+
+        var headers = [];
+        headerElement.forEach(function(header) {
+            var headerText = normalize(header.innerHTML);
+            headers.push(headerText);
+        });
+
+        return headers;
     }
 
     var matched = function(element) {
